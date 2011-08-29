@@ -15,4 +15,7 @@ The recommended permissions are:
 * Non member: view books, view book chapters (they only can view books if the book project is public).
 * Anonymous: view books, view book chapters (they only can view books if the book project is public).
 
+Github repository: https://github.com/txinto/redmine_wiki_books
 Install instructions http://www.redmine.org/projects/redmine/wiki/Plugins
+
+You can see some samples here: http://gatatac.net:3001/books?project_id=redminewikibooks
