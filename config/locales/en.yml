@@ -1,0 +1,18 @@
+# English strings go here for Rails i18n
+en:
+  label_book_new: New book
+  label_book: Book
+  label_book_added: Added book
+  label_book_plural: Books
+  label_book_chapter_plural: Chapters
+  label_book_chapter_new: New chapter
+  label_book_chapter: Chapter
+  field_wiki_page_title: Wiki page
+  field_order: Sort number (float)
+  field_chapter_numbering: Chapter numbering (string)
+  label_book_chapter_prev: Previous chapter
+  label_book_chapter_next: Next chapter
+  label_from_book: from book
+  label_book_chapter_wiki: wiki
+  label_book_chapter_actions: actions
+  label_show_book: Show book

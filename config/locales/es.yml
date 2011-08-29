@@ -1,0 +1,18 @@
+# Spanish strings go here for Rails i18n
+es:
+  label_book_new: Nuevo Libro
+  label_book: Libro
+  label_book_added: Libro añadido
+  label_book_plural: Libros
+  label_book_chapter_plural: Capítulos
+  label_book_chapter_new: Nuevo capítulo
+  label_book_chapter: Capítulo
+  field_wiki_page_title: Página Wiki
+  field_order: Número de orden (real)
+  field_chapter_numbering: Numeración de capítulo (texto)
+  label_book_chapter_prev: Capítulo anterior
+  label_book_chapter_next: Siguiente capítulo
+  label_from_book: del libro
+  label_book_chapter_wiki: wiki
+  label_book_chapter_actions: acciones
+  label_show_book: Ver libro
