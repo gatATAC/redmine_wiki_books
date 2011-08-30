@@ -18,4 +18,4 @@ The recommended permissions are:
 Github repository: https://github.com/txinto/redmine_wiki_books
 Install instructions http://www.redmine.org/projects/redmine/wiki/Plugins
 
-You can see some samples here: http://gatatac.net:3001/books?project_id=redminewikibooks
+You can see some samples here: http://gatatac.net/books?project_id=redminewikibooks
