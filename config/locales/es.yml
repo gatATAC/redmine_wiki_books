@@ -12,8 +12,12 @@ es:
   field_chapter_numbering: Numeración de capítulo (texto)
   label_book_chapter_prev: Capítulo anterior
   label_book_chapter_next: Siguiente capítulo
+  label_book_chapter_end: Fin del libro
+  label_book_chapter_start: Inicio del libro
   label_from_book: del libro
   label_book_chapter_wiki: wiki
   label_book_chapter_actions: acciones
   label_show_book: Ver libro
-  label_wiki_does_not_exist: La página wiki no existe aún, pulsa aquí para crearla
+  label_wiki_does_not_exist: < La página wiki no existe aún ><br/><br/>  Puede visitar la misma para editarla usando el enlace
+  label_view_wikibook_page_in_wiki: Vea esta página en la wiki
+  label_book_chapter_not_written_yet: < Ups! Este capítulo aún no ha sido escrito >

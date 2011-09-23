@@ -1,0 +1,13 @@
+.book {
+   font: 17px 'Times New Roman',Verdana,Tahoma,Arial,sans-serif;
+   position: relative;
+   margin: 30px 30px 30px 30px;
+   padding: 30px 50px 30px 50px;
+   border-color: gray;
+   border-width: thin thick thick thin;
+   border-style: solid;
+}
+
+div.book ul.toc {
+    font: 100% Arial,Verdana,Tahoma;
+}
