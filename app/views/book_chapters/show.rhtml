@@ -17,9 +17,11 @@
   <h2><%=l(:label_book_chapter)%> <%=  @book_chapter.chapter_numbering %> <%=l(:label_from_book)%> '<%= @book.title%>' </h2>
   <%if @book_chapter.wiki_page.nil?%>
     <%= l(:label_wiki_does_not_exist) %>
-    <td><%= link_to_if_authorized(h(@book_chapter.wiki_page_title), {:controller => 'wiki', :action => 'show', :project_id => @book.project, :id => Wiki.titleize(@book_chapter.wiki_page_title)}) || h(@book_chapter.wiki_page_title) unless @book_chapter.wiki_page_title.blank? || @book.project.wiki.nil? %></td>
+    <%= link_to_if_authorized(h(@book_chapter.wiki_page_title), {:controller => 'wiki', :action => 'show', :project_id => @book.project, :id => Wiki.titleize(@book_chapter.wiki_page_title)}) || h(@book_chapter.wiki_page_title) unless @book_chapter.wiki_page_title.blank? || @book.project.wiki.nil? %>
   <% else %>
+  <div class="wiki">
     <%=  textilizable @book_chapter.wiki_page.text %>
+  </div>
   <% end %>
     
   <% if @book_chapter_next 
