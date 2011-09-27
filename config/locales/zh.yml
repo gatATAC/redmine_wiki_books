@@ -1,4 +1,6 @@
-# Spanish strings go here for Rails i18n
+# Zh strings go here for Rails i18n
+# need to be updated to 0.0.2 version
+# Thanks to https://github.com/archonwang for the incredible help.
 zh:
   label_book_new: 新建Wiki书籍
   label_book: Wiki书籍
