@@ -8,9 +8,11 @@ Redmine::Plugin.register :redmine_wiki_books do
   url 'http://gatatac.net/projects/redminewikibooks'
   author_url 'http://gatatac.net/users/3'
 
-   permission :view_books, :books => [:index,:show]
-   permission :manage_books, {:books => [:new,:create,:add_book_chapter,:edit,:destroy],:book_chapters => [:new,:create,:add_book_chapter,:edit,:destroy]}
-   menu :project_menu, :books, { :controller => 'books', :action => 'index' }, :caption => :label_book_plural, :after => :activity, :param => :project_id
-   permission :view_book_chapters, :book_chapters => [:index,:show]
+  project_module :books do
+    permission :view_books, :books => [:index,:show]
+    permission :manage_books, {:books => [:new,:create,:add_book_chapter,:edit,:destroy],:book_chapters => [:new,:create,:add_book_chapter,:edit,:destroy]}
+    permission :view_book_chapters, :book_chapters => [:index,:show]
+  end
+  menu :project_menu, :books, { :controller => 'books', :action => 'index' }, :caption => :label_book_plural, :after => :activity, :param => :project_id
 
 end
