@@ -1,0 +1,26 @@
+<div class="book_chapters">
+  <table>
+    <th><tr><td><b>#</b></td><td><b><%=l(:label_book_chapter_wiki)%></b></td><% if options[:deletable] %><td><b><%=l(:label_book_chapter_actions)%></b></td><% end %></tr></th>
+<% for book_chapter in book_chapters %>
+<tr><td><%= book_chapter.chapter_numbering %> </td><td>
+    <%  if (book_chapter.wiki_page.nil?) 
+    page_text=book_chapter.wiki_page_title+" [TO DO!!!!]"
+    else 
+    page_text=book_chapter.wiki_page.pretty_title
+    end
+    %>
+    
+    <%= link_to_if_authorized(h(page_text), {:controller => 'book_chapters', :action => 'show', :project_id => book_chapter.project, :id => book_chapter.id }) || h(book_chapter.wiki_page.pretty_title) unless book_chapter.wiki_page_title.blank? || book_chapter.project.wiki.nil? %>
+  </td>
+  <td>
+  <% if options[:deletable] %>
+    <%= link_to_if_authorized image_tag('edit.png'), {:controller => 'book_chapters', :action => 'edit', :id => book_chapter}, :accesskey => accesskey(:edit) %>
+    <%= link_to_if_authorized image_tag('delete.png'), {:controller => 'book_chapters', :action => 'destroy', :id => book_chapter},
+                                         :confirm => l(:text_are_you_sure),
+                                         :method => :post,
+                                         :class => 'delete',
+                                         :title => l(:button_delete) %>
+  <% end %>
+  </td></tr>
+<% end %></table>
+</div>
