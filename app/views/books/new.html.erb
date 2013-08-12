@@ -1,11 +1,8 @@
 <h2><%=l(:label_book_new)%></h2>
-uno
 <% form_tag({:controller => 'books', :action => 'new', :project_id => @project}, :class => "tabular", :multipart => true) do %>
 <%= render :partial => 'books/form' %>
 <div class="box">
 <p><label><%=l(:label_book_chapter_plural)%></label><%= render :partial => 'book_chapters/form' %></p>
 </div>
-tres
 <%= submit_tag l(:button_create) %>
 <% end %>
-dos

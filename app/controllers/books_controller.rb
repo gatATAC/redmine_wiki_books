@@ -24,13 +24,6 @@ class BooksController < ApplicationController
 
   def new
     @book = Book.new(params[:book])
-    print "++++++++++++++++++++ey!!!"
-    print params[:book]
-    print "JOroaba!!"
-    print @book
-    print "Tio!!!"
-    print @project
-    print "Aqui va!!!"
     @book.project = @project
     if request.post? and @book.save	
       flash[:notice] = l(:notice_successful_create)
