@@ -25,7 +25,7 @@ class Book < ActiveRecord::Base
       #self.category ||= bookCategory.default
     end
   end
-  
+
   def book_chapters_deletable?(user=User.current)
     (respond_to?(:visible?) ? visible?(user) : true) &&
       user.allowed_to?(:manage_books, self.project)
@@ -41,5 +41,5 @@ class Book < ActiveRecord::Base
       @updated_on = (a && a.created_on) || created_on
     end
     @updated_on
-  end  
+  end
 end

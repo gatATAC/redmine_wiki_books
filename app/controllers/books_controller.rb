@@ -1,14 +1,14 @@
 class BooksController < ApplicationController
-  unloadable 
+  unloadable
   default_search_scope :books
   model_object Book
   before_filter :find_project, :only => [:index, :new]
   before_filter :find_model_object, :except => [:index, :new]
   before_filter :find_project_from_association, :except => [:index, :new]
   before_filter :authorize
-  
+
   helper :book_chapters
-  
+
   def index
     @sort_by = %w(date title author).include?(params[:sort_by]) ? params[:sort_by] : 'category'
     books = Book.find_all_by_project_id(@project.id)
@@ -17,7 +17,7 @@ class BooksController < ApplicationController
     @book.project=@project
     render :layout => false if request.xhr?
   end
-  
+
   def show
     @book_chapters = @book.book_chapters.find(:all)
   end
@@ -25,25 +25,25 @@ class BooksController < ApplicationController
   def new
     @book = Book.new(params[:book])
     @book.project = @project
-    if request.post? and @book.save	
+    if request.post? and @book.save
       flash[:notice] = l(:notice_successful_create)
       redirect_to :action => 'index', :project_id => @project
     end
   end
-  
-  
+
+
   def edit
     if request.post? and @book.update_attributes(params[:book])
       flash[:notice] = l(:notice_successful_update)
-      redirect_to :action => 'show', :id => @book 
+      redirect_to :action => 'show', :id => @book
     end
-  end  
+  end
 
   def destroy
     @book.destroy
     redirect_to :controller => 'books', :action => 'index', :project_id => @project
   end
-  
+
   def add_book_chapter
     book_chapter=@book.book_chapters.build(params[:book_chapter])
     book_chapter.wiki_page_title=params[:book_chapter][:wiki_page_title].to_s
@@ -59,10 +59,10 @@ private
   rescue ActiveRecord::RecordNotFound
     render_404
   end
-  
+
   # Renders a warning flash if obj has unsaved attachments
   def render_book_chapter_warning_if_needed(obj)
     flash[:warning] = "Esto es una prueba"
-  end  
-  
+  end
+
 end

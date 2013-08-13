@@ -16,7 +16,7 @@ module BookChaptersHelper
   # @param [optional, Hash] html_options Options passed to link_to
   # @param [optional, Hash] parameters_for_method_reference Extra parameters for link_to
   def link_label_to_if_authorized(label, name, rejection_text, options = {}, html_options = nil, *parameters_for_method_reference)
-      ret=link_to_if_authorized(name, options, html_options, *parameters_for_method_reference) 
+      ret=link_to_if_authorized(name, options, html_options, *parameters_for_method_reference)
       if (!ret.nil?) then
         ret=label+" "+ret
       else
@@ -24,5 +24,5 @@ module BookChaptersHelper
       end
       ret
   end
-  
+
 end

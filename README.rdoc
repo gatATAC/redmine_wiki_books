@@ -1,21 +1,3 @@
-= wiki_books
+= redmine_wiki_books
 
-This plugin allows the user to define a book index of wiki pages and navigate through the book.
-Each project has its own books based on wiki pages.  
-Each book contains chapters.  
-Each chapter is a link to a wiki page and has a sorting order value (a float) and a chapter numbering (an string).
-The numbering is shown in the book index, preceding each chapter.  Some examples are: 1.2, 3.a), etc.
-The sorting order allows the user to control the chapter order.
-
-The wiki books permission for editing and managing the books is based in the plugin permission system.
-The recommended permissions are:
-* Manager role: view books, manage books, view book chapters.
-* Developer role: view books, manage books, view book chapters.
-* Reporter role: view books, view book chapters.
-* Non member: view books, view book chapters (they only can view books if the book project is public).
-* Anonymous: view books, view book chapters (they only can view books if the book project is public).
-
-Github repository: https://github.com/txinto/redmine_wiki_books
-Install instructions http://www.redmine.org/projects/redmine/wiki/Plugins
-
-You can see some samples here: http://gatatac.net/books?project_id=redminewikibooks
+Description goes here

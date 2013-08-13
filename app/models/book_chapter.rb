@@ -25,7 +25,7 @@ class BookChapter < ActiveRecord::Base
   def deletable?(user=User.current)
     book.book_chapters_deletable?(user)
   end
-  
+
   def wiki_page
     if project.wiki && !wiki_page_title.blank?
       @wiki_page ||= project.wiki.find_page(wiki_page_title)

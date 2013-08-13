@@ -9,7 +9,7 @@
 
 
 <div class="main">
-  <% if @book_chapter_prev 
+  <% if @book_chapter_prev
     if @book_chapter_prev.wiki_page.nil?
       wiki_prev_text=@book_chapter_prev.wiki_page_title
     else
@@ -19,11 +19,19 @@
     <h4 align="right"><%= l(:label_book_chapter_prev) %>: <%= link_to_if_authorized(h(wiki_prev_text), {:controller => 'book_chapters', :action => 'show', :project_id => @book.project, :id => @book_chapter_prev.id}) || h(@book_chapter_prev.wiki_page_title) unless @book_chapter_prev.wiki_page_title.blank? || @book.project.wiki.nil? %></h4>
   <% end %>
   <h2><%=l(:label_book_chapter)%> <%=  @book_chapter.chapter_numbering %> <%=l(:label_from_book)%> '<%= @book.title%>' </h2>
-  <%if @book_chapter.wiki_page.nil? 
+  <%if @book_chapter.wiki_page.nil?
     auxAction='edit'
   %>
-    <%= link_label_to_if_authorized(l(:label_wiki_does_not_exist),h(@book_chapter.wiki_page_title), l(:label_book_chapter_not_written_yet), {:controller => 'wiki', :action => 'edit', :project_id => @book.project, :id => Wiki.titleize(@book_chapter.wiki_page_title)}) %>
-  <% else 
+    <% #link_label_to_if_authorized(l(:label_wiki_does_not_exist),h(@book_chapter.wiki_page_title), l(:label_book_chapter_not_written_yet), {:controller => 'wiki', :action => 'edit', :project_id => @book.project, :id => Wiki.titleize(@book_chapter.wiki_page_title)})
+        ret=link_to_if_authorized(h(@book_chapter.wiki_page_title), {:controller => 'wiki', :action => 'edit', :project_id => @book.project, :id => Wiki.titleize(@book_chapter.wiki_page_title)})
+        if (!ret.nil?) then %>
+          <%= l(:label_wiki_does_not_exist) %>
+          <%= ret %>
+        <%  else %>
+          <%= l(:label_book_chapter_not_written_yet)  %>
+        <%  end 
+      %>
+  <% else
     auxAction='show'
   %>
     <div class="wiki">
@@ -33,7 +41,7 @@
     </div>
   <% end %>
 
-  <% if @book_chapter_next 
+  <% if @book_chapter_next
     if @book_chapter_next.wiki_page.nil?
       wiki_next_text=@book_chapter_next.wiki_page_title
     else
@@ -41,11 +49,11 @@
     end  %>
     <h4 align="right"><%=  l(:label_book_chapter_next) %> <%= link_to_if_authorized(h(wiki_next_text), {:controller => 'book_chapters', :action => 'show', :project_id => @book.project, :id => @book_chapter_next.id}) || h(@book_chapter_next.wiki_page_title) unless @book_chapter_next.wiki_page_title.blank? || @book.project.wiki.nil? %></h4>
   <% else %>
-    <h4 align="right"><%=  l(:label_book_chapter_end) %></h4>  
+    <h4 align="right"><%=  l(:label_book_chapter_end) %></h4>
   <% end %>
 </div>
 <% if !@book_chapter.wiki_page.nil?  %>
-  <h5><%= link_label_to_if_authorized(l(:label_view_wikibook_page_in_wiki)+": ",h(@book_chapter.wiki_page_title),"", {:controller => 'wiki', :action => 'show', :project_id => @book.project, :id => Wiki.titleize(@book_chapter.wiki_page_title)}) || h(@book_chapter.wiki_page_title) unless @book_chapter.wiki_page_title.blank? || @book.project.wiki.nil? %></h5>
+  <h5><% link_label_to_if_authorized(l(:label_view_wikibook_page_in_wiki)+": ",h(@book_chapter.wiki_page_title),"", {:controller => 'wiki', :action => 'show', :project_id => @book.project, :id => Wiki.titleize(@book_chapter.wiki_page_title)}) || h(@book_chapter.wiki_page_title) unless @book_chapter.wiki_page_title.blank? || @book.project.wiki.nil? %></h5>
 <% end %>
 <% content_for :sidebar do %>
 
@@ -67,15 +75,29 @@
   <h3><%= l(:label_book_chapter_plural) %></h3>
   <%= link_to_book_chapters @book %>
 
+  <script type="text/javascript">
+
+$(document).ready(function(){
+    $("#add_book_chapter_link").click(function(event){
+        event.preventDefault();
+        $(this).hide();
+        $("#add_book_chapter_form").show();
+        $("#add_book_chapter_form").scrollTo();
+    });
+});
+
+</script>
+
   <% if authorize_for('books', 'add_book_chapter') %>
-    <p><%= link_to l(:label_book_chapter_new), {}, :onclick => "Element.show('add_book_chapter_form'); Element.hide(this); Element.scrollTo('add_book_chapter_form'); return false;",
-        :id => 'add_book_chapter_link' %></p>
-    <% form_tag({ :controller => 'books', :action => 'add_book_chapter', :id => @book }, :id => "add_book_chapter_form", :style => "display:none;") do %>
+    <p><%= link_to l(:label_book_chapter_new), {},
+            #:onclick => "Element.show('add_book_chapter_form'); Element.hide(this); Element.scrollTo('add_book_chapter_form'); return false;"
+            :id => 'add_book_chapter_link' %></p>
+    <%= form_tag({ :controller => 'books', :action => 'add_book_chapter', :id => @book }, :id => "add_book_chapter_form", :style => "display:none;") do %>
       <div class="box">
         <p><%= render :partial => 'book_chapters/form' %></p>
       </div>
       <%= submit_tag l(:button_add) %>
-    <% end %> 
+    <% end %>
   <% end %>
 
   <% html_title @book.title -%>

@@ -1,16 +1,30 @@
 <div class="contextual">
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+    $("#add_book_link").click(function(event){
+        event.preventDefault();
+        $(this).hide();
+        $("#add-book").show();
+    });
+});
+
+</script>
+  
 <%= link_to_if_authorized l(:label_book_new),
                           {:controller => 'books', :action => 'new', :project_id => @project},
-                          :class => 'icon icon-add',
-                          :onclick => 'Element.show("add-book"); Form.Element.focus("book_title"); return false;' %>
+                          :class => 'icon icon-add',:id => 'add_book_link'
+                        #,:onclick => "Element.show('add-book'); Form.Element.focus('book_title'); return false;".html_safe
+                        %>
 </div>
 <div id="add-book" style="display:none;">
-seis
+
   <h2><%=l(:label_book_new)%></h2>
-<% form_tag({:controller => 'books', :action => 'new', :project_id => @project}, :class => "tabular", :multipart => true) do %>
+<%= form_tag({:controller => 'books', :action => 'new', :project_id => @project}, :class => "tabular", :multipart => true) do %>
 <%= render :partial => 'books/form' %>
 <%= submit_tag l(:button_create) %>
-<%= link_to l(:button_cancel), "#", :onclick => 'Element.hide("add-book")' %>
+<%= link_to l(:button_cancel), "#", :onclick => "Element.hide('add-book')".html_safe %>
 <% end %>
 </div>
 

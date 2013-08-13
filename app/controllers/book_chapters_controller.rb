@@ -1,10 +1,10 @@
 class BookChaptersController < ApplicationController
-  unloadable 
+  unloadable
   before_filter :find_project
   before_filter :read_authorize, :except => :destroy
   before_filter :delete_authorize, :only => :destroy
 
-  verify :method => :post, :only => :destroy
+  #verify :method => :post, :only => :destroy
 
   def show
     @book=@book_chapter.book
@@ -16,7 +16,7 @@ class BookChaptersController < ApplicationController
       @book_chapter_prev = nil
     end
   end
-  
+
   #def destroy
     # Make sure association callbacks are called
    # @book_chapter.book.book_chapters.delete(@book_chapter)
@@ -24,20 +24,20 @@ class BookChaptersController < ApplicationController
   #rescue ::ActionController::RedirectBackError
    # redirect_to :controller => 'projects', :action => 'show', :id => @project
   #end
-  
+
   def destroy
     book=@book_chapter.book
     @book_chapter.destroy
     redirect_to :controller => 'books', :action => 'show', :id => book
   end
-  
-  
+
+
   def edit
     if request.post? and @book_chapter.update_attributes(params[:book_chapter])
       flash[:notice] = l(:notice_successful_update)
       redirect_to :controller => 'books', :action => 'show', :id => @book_chapter.book
     end
-  end  
+  end
 private
   def find_project
     @book_chapter = BookChapter.find(params[:id])
