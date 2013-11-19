@@ -11,18 +11,18 @@
 <div class="main">
   <% if @book_chapter_prev
     if @book_chapter_prev.wiki_page.nil?
-      wiki_prev_text=@book_chapter_prev.wiki_page_title
+      wiki_prev_text=@book_chapter_prev.chapter_title
     else
-      wiki_prev_text=@book_chapter_prev.wiki_page.pretty_title
+      wiki_prev_text=@book_chapter_prev.chapter_title
     end
   %>
-    <h4 align="right"><%= l(:label_book_chapter_prev) %>: <%= link_to_if_authorized(h(wiki_prev_text), {:controller => 'book_chapters', :action => 'show', :project_id => @book.project, :id => @book_chapter_prev.id}) || h(@book_chapter_prev.wiki_page_title) unless @book_chapter_prev.wiki_page_title.blank? || @book.project.wiki.nil? %></h4>
+    <h4 align="right"><%= l(:label_book_chapter_prev) %>: <%= link_to_if_authorized(h(wiki_prev_text), {:controller => 'book_chapters', :action => 'show', :project_id => @book.project, :id => @book_chapter_prev.id}) || h(@book_chapter_prev.chapter_title) unless @book_chapter_prev.wiki_page_title.blank? || @book.project.wiki.nil? %></h4>
   <% end %>
   <h2><%=l(:label_book_chapter)%> <%=  @book_chapter.chapter_numbering %> <%=l(:label_from_book)%> '<%= @book.title%>' </h2>
   <%if @book_chapter.wiki_page.nil?
     auxAction='edit'
   %>
-    <%= ret=link_label_to_if_authorized(l(:label_wiki_does_not_exist),h(@book_chapter.wiki_page_title), l(:label_book_chapter_not_written_yet), {:controller => 'wiki', :action => 'edit', :project_id => @book.project, :id => Wiki.titleize(@book_chapter.wiki_page_title)}) %>
+    <%= ret=link_label_to_if_authorized(l(:label_wiki_does_not_exist),h(@book_chapter.chapter_title), l(:label_book_chapter_not_written_yet), {:controller => 'wiki', :action => 'edit', :project_id => @book.project, :id => Wiki.titleize(@book_chapter.wiki_page_title)}) %>
   <% else
     auxAction='show'
   %>
@@ -35,17 +35,17 @@
 
   <% if @book_chapter_next
     if @book_chapter_next.wiki_page.nil?
-      wiki_next_text=@book_chapter_next.wiki_page_title
+      wiki_next_text=@book_chapter_next.chapter_title
     else
-      wiki_next_text=@book_chapter_next.wiki_page.pretty_title
+      wiki_next_text=@book_chapter_next.chapter_title
     end  %>
-    <h4 align="right"><%=  l(:label_book_chapter_next) %> <%= link_to_if_authorized(h(wiki_next_text), {:controller => 'book_chapters', :action => 'show', :project_id => @book.project, :id => @book_chapter_next.id}) || h(@book_chapter_next.wiki_page_title) unless @book_chapter_next.wiki_page_title.blank? || @book.project.wiki.nil? %></h4>
+    <h4 align="right"><%=  l(:label_book_chapter_next) %> <%= link_to_if_authorized(h(wiki_next_text), {:controller => 'book_chapters', :action => 'show', :project_id => @book.project, :id => @book_chapter_next.id}) || h(@book_chapter_next.chapter_title) unless @book_chapter_next.wiki_page_title.blank? || @book.project.wiki.nil? %></h4>
   <% else %>
     <h4 align="right"><%=  l(:label_book_chapter_end) %></h4>
   <% end %>
 </div>
 <% if !@book_chapter.wiki_page.nil?  %>
-  <h5><%= link_label_to_if_authorized(l(:label_view_wikibook_page_in_wiki)+": ",h(@book_chapter.wiki_page_title),"", {:controller => 'wiki', :action => 'show', :project_id => @book.project, :id => Wiki.titleize(@book_chapter.wiki_page_title)}) || h(@book_chapter.wiki_page_title) unless @book_chapter.wiki_page_title.blank? || @book.project.wiki.nil? %></h5>
+  <h5><%= link_label_to_if_authorized(l(:label_view_wikibook_page_in_wiki)+": ",h(@book_chapter.chapter_title),"", {:controller => 'wiki', :action => 'show', :project_id => @book.project, :id => Wiki.titleize(@book_chapter.wiki_page_title)}) || h(@book_chapter.chapter_title) unless @book_chapter.wiki_page_title.blank? || @book.project.wiki.nil? %></h5>
 <% end %>
 <% content_for :sidebar do %>
 

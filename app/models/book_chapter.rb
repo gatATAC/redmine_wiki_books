@@ -2,8 +2,9 @@ class BookChapter < ActiveRecord::Base
   unloadable # <= That's the ticket!
   belongs_to :book
 
-  validates_presence_of :book, :wiki_page_title
+  validates_presence_of :book, :wiki_page_title, :chapter_title
   validates_length_of :wiki_page_title, :maximum => 255
+  validates_length_of :chapter_title, :maximum => 255
 
   acts_as_event :title => :wiki_page_title,
                 :url => Proc.new {|o| {:controller => 'book_chapters', :action => 'show', :id => o.id, :wiki_page_title => o.wiki_page_title}}

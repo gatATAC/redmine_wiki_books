@@ -8,6 +8,7 @@ en:
   label_book_chapter_new: New chapter
   label_book_chapter: Chapter
   field_wiki_page_title: Wiki page
+  field_chapter_title: Chapter title
   field_order: Sort number (float)
   field_chapter_numbering: Chapter numbering (string)
   label_book_chapter_prev: Previous chapter
