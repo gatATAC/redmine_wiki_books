@@ -17,7 +17,7 @@
     <%= link_to_if_authorized image_tag('edit.png'), {:controller => 'book_chapters', :action => 'edit', :id => book_chapter}, :accesskey => accesskey(:edit) %>
     <%= link_to_if_authorized image_tag('delete.png'), {:controller => 'book_chapters', :action => 'destroy', :id => book_chapter},
                                          :confirm => l(:text_are_you_sure),
-                                         :method => :post,
+                                         :method => :delete,
                                          :class => 'delete',
                                          :title => l(:button_delete) %>
   <% end %>

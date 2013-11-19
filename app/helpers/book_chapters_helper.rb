@@ -18,11 +18,11 @@ module BookChaptersHelper
   def link_label_to_if_authorized(label, name, rejection_text, options = {}, html_options = nil, *parameters_for_method_reference)
       ret=link_to_if_authorized(name, options, html_options, *parameters_for_method_reference)
       if (!ret.nil?) then
-        ret=label+" "+ret
+        ret=label+" "+ret.html_safe
       else
         ret=rejection_text
       end
-      ret
+      ret.html_safe
   end
 
 end

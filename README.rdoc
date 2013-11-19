@@ -18,4 +18,6 @@ The recommended permissions are:
 Github repository: https://github.com/txinto/redmine_wiki_books
 Install instructions http://www.redmine.org/projects/redmine/wiki/Plugins
 
-You can see some samples here: http://gatatac.org/projects/redmine-wikibooks/wiki
+You can see some samples here: http://gatatac.org/book_chapters/1?project_id=redmine-wikibooks and http://gatatac.org/projects/redmine-wikibooks/wiki
+
+Tested with Redmine 2.3.2 stable.

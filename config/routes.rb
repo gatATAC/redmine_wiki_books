@@ -9,4 +9,6 @@ resources :book_chapters
 post 'books/new', :to => 'books#new'
 post 'books/:id/add_book_chapter', :to => 'books#add_book_chapter'
 get 'book_chapters/edit', :to => 'book_chapters#edit'
+post 'book_chapters/:id/edit', :to => 'book_chapters#edit'
 get 'book_chapters/destroy', :to => 'book_chapters#destroy'
+post 'book_chapters/:id/destroy', :to => 'book_chapters#destroy'

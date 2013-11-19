@@ -4,7 +4,7 @@
 
 <div class="contextual">
   <%= link_to_if_authorized l(:button_edit), {:controller => 'books', :action => 'edit', :id => @book}, :class => 'icon icon-edit', :accesskey => accesskey(:edit) %>
-  <%= link_to_if_authorized l(:button_delete), {:controller => 'books', :action => 'destroy', :id => @book}, :confirm => l(:text_are_you_sure), :method => :post, :class => 'icon icon-del' %>
+  <%= link_to_if_authorized l(:button_delete), {:controller => 'books', :action => 'destroy', :id => @book}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
 </div>
 
 <script type="text/javascript">
@@ -41,7 +41,7 @@ $(document).ready(function(){
 
   <div class="contextual">
     <%= link_to_if_authorized l(:button_edit), {:controller => 'books', :action => 'edit', :id => @book}, :class => 'icon icon-edit', :accesskey => accesskey(:edit) %>
-    <%= link_to_if_authorized l(:button_delete), {:controller => 'books', :action => 'destroy', :id => @book}, :confirm => l(:text_are_you_sure), :method => :post, :class => 'icon icon-del' %>
+    <%= link_to_if_authorized l(:button_delete), {:controller => 'books', :action => 'destroy', :id => @book}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
   </div>
 
 

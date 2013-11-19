@@ -38,6 +38,7 @@ class BookChaptersController < ApplicationController
       redirect_to :controller => 'books', :action => 'show', :id => @book_chapter.book
     end
   end
+  
 private
   def find_project
     @book_chapter = BookChapter.find(params[:id])
