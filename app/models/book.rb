@@ -1,4 +1,5 @@
 class Book < ActiveRecord::Base
+  set_table_name "wiki_books"
   unloadable # <= That's the ticket!
   belongs_to :project
   has_many :book_chapters, :order => :order_float
