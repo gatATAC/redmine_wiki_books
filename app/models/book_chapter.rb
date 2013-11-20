@@ -1,5 +1,8 @@
 class BookChapter < ActiveRecord::Base
   unloadable # <= That's the ticket!
+  
+  self.table_name = "wiki_book_chapters"
+
   belongs_to :book
 
   validates_presence_of :book, :wiki_page_title, :chapter_title

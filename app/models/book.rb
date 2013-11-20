@@ -1,6 +1,8 @@
 class Book < ActiveRecord::Base
-  set_table_name "wiki_books"
   unloadable # <= That's the ticket!
+
+  self.table_name ="wiki_books"
+
   belongs_to :project
   has_many :book_chapters, :order => :order_float
   acts_as_attachable :delete_permission => :manage_books
