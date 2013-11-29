@@ -68,6 +68,8 @@ $(document).ready(function(){
     <% end %>
   <% end %>
 
+  <%= call_hook :view_books_show_bottom, :book => @book %>
+    
   <% html_title @book.title -%>
 
   <% content_for :header_tags do %>

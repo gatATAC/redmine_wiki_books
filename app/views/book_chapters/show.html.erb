@@ -91,7 +91,9 @@ $(document).ready(function(){
       <%= submit_tag l(:button_add) %>
     <% end %>
   <% end %>
-
+    
+  <%= call_hook :view_book_chapters_show_bottom, :book => @book %>
+    
   <% html_title @book.title -%>
 
   <% content_for :header_tags do %>
