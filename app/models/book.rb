@@ -4,14 +4,16 @@ class Book < ActiveRecord::Base
   self.table_name ="wiki_books"
 
   belongs_to :project
-  has_many :book_chapters, :order => :order_float
+#  has_many :book_chapters, :order => :order_float
+#  :order is deprecated in Rails 4
+  has_many :book_chapters, -> { order(:order_float) }
   acts_as_attachable :delete_permission => :manage_books
 
-  acts_as_searchable :columns => ['title', "#{table_name}.description"], :include => :project
+  acts_as_searchable :columns => ['title', "#{table_name}.description"]
   acts_as_event :title => Proc.new {|o| "#{l(:label_book)}: #{o.title}"},
     :author => Proc.new {|o| (a = o.book_chapters.find(:first)) ? a.author : nil },
     :url => Proc.new {|o| {:controller => 'books', :action => 'show', :id => o.id}}
-  acts_as_activity_provider :find_options => {:include => :project}
+  acts_as_activity_provider :scope => includes(:project)
 
   validates_presence_of :project, :title
   validates_length_of :title, :maximum => 60

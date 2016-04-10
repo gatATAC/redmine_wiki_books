@@ -14,7 +14,7 @@ class BookChapter < ActiveRecord::Base
 
   acts_as_activity_provider :type => 'books',
                             :permission => :view_books,
-                            :find_options => {:select => "#{BookChapter.table_name}.*",
+			     :scope => {:select => "#{BookChapter.table_name}.*",
                                               :joins => "LEFT JOIN #{Book.table_name} ON #{Book.table_name}.id = #{BookChapter.table_name}.book_id " +
                                                         "LEFT JOIN #{Project.table_name} ON #{Book.table_name}.project_id = #{Project.table_name}.id"}
 

@@ -11,8 +11,17 @@ class BooksController < ApplicationController
 
   def index
     @sort_by = %w(date title author).include?(params[:sort_by]) ? params[:sort_by] : 'category'
-    books = Book.find_all_by_project_id(@project.id)
+#    books = Book.find_all_by_project_id(@project.id)
+     books = Book.find_by project_id: @project.id
+     if (books==nil) then
+       @grouped={}
+     else
+
     @grouped = books.group_by {|d| d.title.first.upcase}
+    if (@grouped==nil) then
+        @grouped={}
+    end
+	end
     @book = Book.new
     @book.project=@project
     render :layout => false if request.xhr?
@@ -23,7 +32,7 @@ class BooksController < ApplicationController
   end
 
   def new
-    @book = Book.new(params[:book])
+    @book = Book.new(user_params)
     @book.project = @project
     if request.post? and @book.save
       flash[:notice] = l(:notice_successful_create)
@@ -63,6 +72,10 @@ private
   # Renders a warning flash if obj has unsaved attachments
   def render_book_chapter_warning_if_needed(obj)
     flash[:warning] = "Esto es una prueba"
+  end
+
+  def user_params
+	params.require(:book).permit(:title, :description)
   end
 
 end
