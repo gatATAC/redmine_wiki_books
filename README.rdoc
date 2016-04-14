@@ -1,5 +1,7 @@
 = wiki_books
 
+NOTE: for a Redmine 3.x compatible version, check the rm3 branch.
+
 This plugin allows the user to define a book index of wiki pages and navigate through the book.
 Each project has its own books based on wiki pages.  
 Each book contains chapters.  
