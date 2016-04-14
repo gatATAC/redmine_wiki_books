@@ -2,7 +2,7 @@ Redmine::Plugin.register :redmine_wiki_books do
   name 'Redmine Wiki Books plugin'
   author 'Txinto Vaz'
   description 'This is a plugin for Redmine that allows the user to read books written in wiki pages'
-  version '0.0.4'
+  version '0.0.5'
   url 'http://gatatac.org/projects/redmine-wikibooks/wiki'
   author_url 'http://gatatac.org/users/3'
 
