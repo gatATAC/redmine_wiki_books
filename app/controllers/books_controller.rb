@@ -54,7 +54,7 @@ class BooksController < ApplicationController
   end
 
   def add_book_chapter
-    book_chapter=@book.book_chapters.build(params[:book_chapter])
+    book_chapter=@book.book_chapters.build(user_params_chapter)
     book_chapter.wiki_page_title=params[:book_chapter][:wiki_page_title].to_s
     book_chapter.order_float=params[:book_chapter][:order_float]
     book_chapter.book=@book
@@ -76,6 +76,10 @@ private
 
   def user_params
 	params.require(:book).permit(:title, :description)
+  end
+  def user_params_chapter
+       	params.require(:book_chapter).permit(:wiki_page_title, :chapter_title,
+                :order_float, :chapter_numbering)
   end
 
 end

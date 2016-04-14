@@ -33,13 +33,18 @@ class BookChaptersController < ApplicationController
 
 
   def edit
-    if request.post? and @book_chapter.update_attributes(params[:book_chapter])
+    if request.post? and @book_chapter.update_attributes(user_params)
       flash[:notice] = l(:notice_successful_update)
       redirect_to :controller => 'books', :action => 'show', :id => @book_chapter.book
     end
   end
   
 private
+  def user_params
+	params.require(:book_chapter).permit(:wiki_page_title, :chapter_title, 
+		:order_float, :chapter_numbering)
+  end
+
   def find_project
     @book_chapter = BookChapter.find(params[:id])
     # Show 404 if the wiki_page in the url is wrong
