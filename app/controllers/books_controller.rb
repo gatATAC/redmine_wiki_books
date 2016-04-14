@@ -12,7 +12,7 @@ class BooksController < ApplicationController
   def index
     @sort_by = %w(date title author).include?(params[:sort_by]) ? params[:sort_by] : 'category'
 #    books = Book.find_all_by_project_id(@project.id)
-     books = Book.find_by project_id: @project.id
+     books = Book.where(project_id: @project.id)
      if (books==nil) then
        @grouped={}
      else
@@ -28,7 +28,7 @@ class BooksController < ApplicationController
   end
 
   def show
-    @book_chapters = @book.book_chapters.find(:all)
+    @book_chapters = @book.book_chapters
   end
 
   def new
