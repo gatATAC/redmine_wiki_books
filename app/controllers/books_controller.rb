@@ -42,7 +42,7 @@ class BooksController < ApplicationController
 
 
   def edit
-    if request.post? and @book.update_attributes(params[:book])
+    if request.post? and @book.update_attributes(user_params)
       flash[:notice] = l(:notice_successful_update)
       redirect_to :action => 'show', :id => @book
     end
