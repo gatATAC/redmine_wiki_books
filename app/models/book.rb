@@ -41,10 +41,10 @@ class Book < ActiveRecord::Base
   end
 
   def updated_on
-#    unless @updated_on
-#      a = book_chapters.find(:all)#(:first, :order => 'created_on DESC')
-#      @updated_on = (a && a.created_on) || created_on
-#    end
+    unless @updated_on
+      a = book_chapters.order("created_on DESC").first
+      @updated_on = (a && a.created_on) || created_on
+    end
     @updated_on
   end
 end
