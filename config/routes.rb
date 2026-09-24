@@ -1,15 +1,8 @@
-# Plugin's routes
-# See: http://guides.rubyonrails.org/routing.html
+resources :books, except: :index do
+  post :add_book_chapter, on: :member
+end
 
-resources :books
-resources :book_chapters
-#post 'books/edit', :to => 'books#edit'
-#get 'books', :to => 'books#index'
-#get 'books/new', :to => 'books#new'
-post 'books/new', :to => 'books#new'
-post 'books/:id/add_book_chapter', :to => 'books#add_book_chapter'
-get 'book_chapters/edit', :to => 'book_chapters#edit'
-post 'book_chapters/:id/edit', :to => 'book_chapters#edit'
-get 'book_chapters/destroy', :to => 'book_chapters#destroy'
-post 'book_chapters/:id/destroy', :to => 'book_chapters#destroy'
-post 'books/:id/edit', :to => 'books#edit'
+resources :book_chapters, only: %i[show edit update destroy]
+
+get 'projects/:project_id/books', to: 'books#index', as: :project_books
+post 'projects/:project_id/books', to: 'books#create'

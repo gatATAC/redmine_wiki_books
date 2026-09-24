@@ -1,6 +1,6 @@
 <h2><%=l(:label_book)%></h2>
 
-<%= form_tag({:action => 'edit', :id => @book}, :class => "tabular") do %>
+<%= form_tag(book_path(@book), method: :patch, class: "tabular") do %>
   <%= render :partial => 'form' %>
   <%= submit_tag l(:button_save) %>
 <% end %>

@@ -1,86 +1,100 @@
 # Redmine Wiki Books
 
-> **TODO — compatibility work pending:** the `main` branch is intended to host a future version compatible with current Redmine releases. That work has not been done yet. The present code is legacy software and should not be installed on a current Redmine instance without an explicit compatibility, migration and security review.
+Redmine plugin for arranging a project's wiki pages as ordered books and reading them with chapter navigation.
 
-Redmine plugin for arranging project wiki pages as ordered books and reading them through a chapter-oriented interface.
+## Status
 
-## Repository status
+Version **0.1.0** targets **Redmine 7.0.1**. It modernises the original plugin while preserving its central model: books belong to projects and chapters refer to wiki pages in those projects.
 
-- `archived` preserves the documented legacy implementation from `master`.
-- `main` is the starting point for a future adaptation to current Redmine releases.
-- The historical `rm3` branch contains later work aimed at Redmine 3.x and remains separate.
-- The `master` implementation declares plugin version `0.0.3` and was tested historically with Redmine 2.3.2.
-- No current Redmine version has been validated yet.
+The historical implementation remains available in the `archived` branch. The former Redmine 3 compatibility work remains in `rm3` for reference.
 
 ## Features
 
 ### Books per project
 
-Each project can enable a `Books` module and maintain its own collection of books. A book has:
+Enable the **Books** project module to create one or more curated books. Each book has a title and formatted description and appears in the project menu.
 
-- a title;
-- a formatted description;
-- creation and update timestamps;
-- an association with its Redmine project;
-- optional attachments through Redmine's attachable model support.
+Books participate in Redmine search and activity views and use the project's visibility rules.
 
-Books are exposed in the project menu and participate in Redmine search and activity streams.
+### Wiki-backed chapters
 
-### Chapters backed by wiki pages
-
-A book contains an ordered list of chapters. Each chapter stores:
+A chapter contains:
 
 - the title of a wiki page in the same project;
 - a display title;
 - a free-form chapter number such as `1.2` or `3.a)`;
-- a floating-point sorting value.
+- a numeric sorting value.
 
-The reader renders the referenced wiki page inside the book view. If the page does not exist, it offers an authorized user a link to create it.
-
-### Reading and navigation
-
-The chapter view provides previous and next navigation, the book description and a chapter index. The book view presents the complete ordered index and visually marks missing wiki pages.
+The book index orders chapters by that sorting value. The reader renders the wiki content and provides previous/next navigation. When the referenced page does not exist, an authorised user can follow the offered link to create it.
 
 ### Permissions
 
-The plugin registers three project permissions:
+The plugin adds three project permissions:
 
-- `view_books`;
-- `manage_books`;
-- `view_book_chapters`.
+- **View books**
+- **Manage books**
+- **View book chapters**
 
-Visibility is delegated to Redmine project permissions. Public-project access therefore depends on the permissions assigned to anonymous and non-member roles.
+Assign them through Redmine roles. Anonymous and non-member access continues to depend on project visibility and role permissions.
 
 ### Extension hooks
 
-The views expose hooks at the bottom of book and chapter pages so other plugins can append content.
+Book and chapter views expose Redmine hooks so other plugins can append contextual content.
+
+## Requirements
+
+- Redmine 7.0.1 or later in the 7.x line.
+- The Wiki module enabled in projects whose pages will be used as chapters.
+
+## Installation
+
+From the Redmine root:
+
+```bash
+git clone https://github.com/gatATAC/redmine_wiki_books.git plugins/redmine_wiki_books
+RAILS_ENV=production bundle exec rake redmine:plugins:migrate NAME=redmine_wiki_books
+```
+
+Restart Redmine, enable **Books** in the desired projects and assign the plugin permissions to the appropriate roles.
+
+## Upgrade from a legacy release
+
+The plugin retains the historical table names `wiki_books` and `wiki_book_chapters`. Before upgrading:
+
+1. back up the database and Redmine files;
+2. test the migration against a copy of the installation;
+3. review the legacy `master` and `rm3` history if the installation came from a Redmine 3 release;
+4. migrate the plugin;
+5. verify books, chapter ordering, missing-page links and permissions.
+
+Do not assume that a database created from `rm3` has exactly the same migration state as one created from historical `master`.
 
 ## Data model
 
-The legacy migrations create and later rename two tables:
+A book belongs to one project and owns an ordered collection of chapters. Deleting a book deletes its chapter records but does not delete the referenced wiki pages.
 
-- `wiki_books` for books and their project association;
-- `wiki_book_chapters` for ordered references to wiki pages.
+A chapter stores a wiki-page title rather than copying wiki content. Changes to that wiki page therefore appear immediately in the book.
 
-The current migration chain and its data-preservation behavior must be reviewed before installation on a modern database.
+## Development and validation
 
-## Limitations of the legacy code
+The current implementation uses Rails 8 controller callbacks, strong parameters, RESTful update/delete routes and current Active Record query APIs.
 
-- Controllers use removed APIs such as `before_filter`, `find_all_by_*`, `update_attributes` and legacy finder syntax.
-- Models use old association ordering and Redmine activity/search APIs.
-- Routes contain overlapping resource and custom declarations that require review.
-- Some destructive actions were historically exposed through GET-compatible routes.
-- Parameter handling predates strong parameters.
-- Views use obsolete helpers, inline JavaScript and old confirmation conventions.
-- Chapter order is represented by a float, which is fragile for repeated insertion and reordering.
-- The chapter model contains a `parent_id` column but does not implement a chapter hierarchy.
-- The legacy tests are not sufficient evidence of compatibility with current Redmine.
-- The `master` and `rm3` histories must be reconciled deliberately rather than copied blindly.
+Regression testing should cover:
 
-## Future adaptation
+- project-module and role permissions;
+- book creation, editing and deletion;
+- chapter creation, editing, deletion and ordering;
+- existing and missing wiki pages;
+- previous/next navigation;
+- search and activity integration;
+- upgrades from both historical branches.
 
-A future implementation should preserve the useful concept—curated reading sequences over project wiki pages—while adopting current Redmine permissions, routing, controller parameters, view helpers, migrations and tests. It should also define stable ordering and explicit behavior for renamed or deleted wiki pages. The legacy code has deliberately not been ported yet.
+## Repository
 
-## License
+The canonical repository is [github.com/gatATAC/redmine_wiki_books](https://github.com/gatATAC/redmine_wiki_books).
 
-Consult the repository history and existing license notices before redistribution or modification.
+## Licence
+
+Copyright © Txinto Vaz and contributors.
+
+This program is free software under the **GNU General Public License version 3**. See [LICENSE](LICENSE).

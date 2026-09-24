@@ -1,4 +1,4 @@
-class CreateBookChapters < ActiveRecord::Migration
+class CreateBookChapters < ActiveRecord::Migration[8.0]
   def change
     create_table :book_chapters do |t|
       t.integer :book_id

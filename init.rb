@@ -1,16 +1,28 @@
+require File.expand_path("lib/redmine_wiki_books/redmine_acts", __dir__)
+RedmineWikiBooks::RedmineActs.install!
+
 Redmine::Plugin.register :redmine_wiki_books do
   name 'Redmine Wiki Books plugin'
   author 'Txinto Vaz'
-  description 'This is a plugin for Redmine that allows the user to read books written in wiki pages'
-  version '0.0.3'
-  url 'http://gatatac.org/projects/redmine-wikibooks/wiki'
-  author_url 'http://gatatac.org/users/3'
+  description 'Arrange project wiki pages as ordered books with chapter navigation.'
+  version '0.1.0'
+  url 'https://github.com/gatATAC/redmine_wiki_books'
+  author_url 'https://github.com/txinto'
+
+  requires_redmine version_or_higher: '7.0.1'
 
   project_module :books do
-    permission :view_books, {:books => [:index,:show]}
-    permission :manage_books, {:books => [:new,:create,:add_book_chapter,:edit,:destroy],:book_chapters => [:new,:create,:add_book_chapter,:edit,:destroy]}
-    permission :view_book_chapters, :book_chapters => [:index,:show]
+    permission :view_books, books: %i[index show]
+    permission :manage_books, {
+      books: %i[new create edit update destroy add_book_chapter],
+      book_chapters: %i[edit update destroy]
+    }
+    permission :view_book_chapters, book_chapters: %i[show]
   end
-  menu :project_menu, :books, { :controller => 'books', :action => 'index' }, :caption => :label_book_plural, :after => :activity, :param => :project_id
 
+  menu :project_menu, :books,
+       { controller: 'books', action: 'index' },
+       caption: :label_book_plural,
+       after: :activity,
+       param: :project_id
 end

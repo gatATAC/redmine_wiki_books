@@ -4,7 +4,7 @@
 
 <div class="contextual">
   <%= link_to_if_authorized l(:button_edit), {:controller => 'books', :action => 'edit', :id => @book}, :class => 'icon icon-edit', :accesskey => accesskey(:edit) %>
-  <%= link_to_if_authorized l(:button_delete), {:controller => 'books', :action => 'destroy', :id => @book}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
+  <%= link_to_if_authorized l(:button_delete), {:controller => 'books', :action => 'destroy', :id => @book}, :data => { :confirm => l(:text_are_you_sure) }, :method => :delete, :class => 'icon icon-del' %>
 </div>
 
 <script type="text/javascript">
@@ -41,7 +41,7 @@ $(document).ready(function(){
 
   <div class="contextual">
     <%= link_to_if_authorized l(:button_edit), {:controller => 'books', :action => 'edit', :id => @book}, :class => 'icon icon-edit', :accesskey => accesskey(:edit) %>
-    <%= link_to_if_authorized l(:button_delete), {:controller => 'books', :action => 'destroy', :id => @book}, :confirm => l(:text_are_you_sure), :method => :delete, :class => 'icon icon-del' %>
+    <%= link_to_if_authorized l(:button_delete), {:controller => 'books', :action => 'destroy', :id => @book}, :data => { :confirm => l(:text_are_you_sure) }, :method => :delete, :class => 'icon icon-del' %>
   </div>
 
 
@@ -60,7 +60,7 @@ $(document).ready(function(){
   <% if authorize_for('books', 'add_book_chapter') %>
     <p><%= link_to l(:label_book_chapter_new), '#', #:onclick => "event.preventDefault();Element.show('add_book_chapter_form'); Element.hide(this); Element.scrollTo('add_book_chapter_form');".html_safe,
         :id => 'add_book_chapter_link' %></p>
-    <%= form_tag({ :controller => 'books', :action => 'add_book_chapter', :id => @book }, :id => "add_book_chapter_form", :style => "display:none;") do %>
+    <%= form_tag(add_book_chapter_book_path(@book), id: "add_book_chapter_form", style: "display:none;") do %>
       <div class="box">
         <p><%= render :partial => 'book_chapters/form' %></p>
       </div>
