@@ -4,7 +4,7 @@ Redmine plugin for arranging a project's wiki pages as ordered books and reading
 
 ## Status
 
-Version **0.1.0** targets **Redmine 7.0.1**. It modernises the original plugin while preserving its central model: books belong to projects and chapters refer to wiki pages in those projects.
+Version **0.1.1** targets **Redmine 7.0.1**. It modernises the original plugin while preserving its central model: books belong to projects and chapters refer to wiki pages in those projects.
 
 The historical implementation remains available in the `archived` branch. The former Redmine 3 compatibility work remains in `rm3` for reference.
 

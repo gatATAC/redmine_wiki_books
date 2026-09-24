@@ -5,7 +5,7 @@ Redmine::Plugin.register :redmine_wiki_books do
   name 'Redmine Wiki Books plugin'
   author 'Txinto Vaz'
   description 'Arrange project wiki pages as ordered books with chapter navigation.'
-  version '0.1.0'
+  version '0.1.1'
   url 'https://github.com/gatATAC/redmine_wiki_books'
   author_url 'https://github.com/txinto'
 
@@ -26,3 +26,8 @@ Redmine::Plugin.register :redmine_wiki_books do
        after: :activity,
        param: :project_id
 end
+
+# Redmine memoizes this list and does not invalidate it when a plugin is
+# registered after the first lookup.
+available_modules = Redmine::AccessControl.available_project_modules
+available_modules << :books unless available_modules.include?(:books)
